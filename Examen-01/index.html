@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Dragon's Gold Heist - Babylon.js</title>
+    <link
+      rel="stylesheet"
+      href="./src/css/styles.css"
+    />
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+  </head>
+  <body>
+    <canvas id="renderCanvas"></canvas>
+
+    <div id="ui-overlay">
+      <h1>Dragon's Gold Heist</h1>
+      <p>
+        Monedas en Cueva: <span id="coins-delivered">0</span> /
+        <span id="total-coins">5</span>
+      </p>
+      <p>
+        <span
+          class="status-indicator"
+          id="status-light"
+        ></span>
+        Estado: <span id="status-text">Sin moneda</span>
+      </p>
+    </div>
+
+    <div id="victory-screen">
+      <h2>Victoria!</h2>
+      <p>Has completado tu tesoro!</p>
+      <p>Todas las monedas están en tu cueva</p>
+    </div>
+
+    <script type="module">
+      // ============================================
+      // MAIN - Punto de entrada del juego
+      // ============================================
+      import { Game } from './src/js/game.js';
+
+      const canvas = document.getElementById('renderCanvas');
+      const engine = new BABYLON.Engine(canvas, true);
+
+      const game = new Game(canvas, engine);
+
+      // Inicializar y arrancar el juego
+      game
+        .init()
+        .then(() => {
+          game.start();
+          console.log(' Juego iniciado correctamente');
+        })
+        .catch((error) => {
+          console.error(' Error al inicializar el juego:', error);
+        });
+    </script>
+  </body>
+</html>
